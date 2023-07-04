@@ -1,24 +1,28 @@
 import { Component, forwardRef } from '@angular/core';
-import {ControlValueAccessor, NG_VALUE_ACCESSOR} from "@angular/forms";
+import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
+import { FroalaEditorDirective } from '../../../library/src/editor/editor.directive';
 
 @Component({
   selector: 'froala-component',
   template: `
-    <textarea [froalaEditor]="config" (froalaModelChange)="onChange($event)" [(froalaModel)]="model"></textarea>
-   `,
+    <textarea
+      [froalaEditor]="config"
+      (froalaModelChange)="onChange($event)"
+      [(froalaModel)]="model"
+    ></textarea>
+  `,
   providers: [
     {
       provide: NG_VALUE_ACCESSOR,
       useExisting: forwardRef(() => FroalaComponent),
-      multi: true
-    }
-  ]
+      multi: true,
+    },
+  ],
+  standalone: true,
+  imports: [FroalaEditorDirective],
 })
 export class FroalaComponent implements ControlValueAccessor {
-
-  constructor() {
-
-  }
+  constructor() {}
 
   // Begin ControlValueAccesor methods.
   onChange = (_) => {};
@@ -29,13 +33,17 @@ export class FroalaComponent implements ControlValueAccessor {
     this.model = content;
   }
 
-  registerOnChange(fn: (_: any) => void): void { this.onChange = fn; }
-  registerOnTouched(fn: () => void): void { this.onTouched = fn; }
+  registerOnChange(fn: (_: any) => void): void {
+    this.onChange = fn;
+  }
+  registerOnTouched(fn: () => void): void {
+    this.onTouched = fn;
+  }
   // End ControlValueAccesor methods.
 
   model: any;
 
   config: Object = {
-    charCounterCount: false
-  }
+    charCounterCount: false,
+  };
 }

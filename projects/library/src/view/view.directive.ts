@@ -1,10 +1,10 @@
 import { Directive, ElementRef, Renderer2, Input } from '@angular/core';
 
 @Directive({
-  selector: '[froalaView]'
+  selector: '[froalaView]',
+  standalone: true,
 })
 export class FroalaViewDirective {
-
   private _element: HTMLElement;
 
   constructor(private renderer: Renderer2, element: ElementRef) {
@@ -17,6 +17,6 @@ export class FroalaViewDirective {
   }
 
   ngAfterViewInit() {
-    this.renderer.addClass(this._element, "fr-view");
+    this.renderer.addClass(this._element, 'fr-view');
   }
 }
