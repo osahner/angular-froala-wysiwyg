@@ -1,3 +1,65 @@
+# Forked as standalone, Ivy, Angular v16 compatible version of angular-froala-wysiwyg
+
+### Instructions from @ice-blaze to get it working: https://github.com/froala/angular-froala-wysiwyg/issues/505#issuecomment-1420827156
+
+* git clone my fork
+* git switch upgrade-to-ivy go to the correct branch
+* npm install
+* npm run build build the project
+* cd dist move to the dist folder
+* npm pack create a tarball of the current folder
+* cp angular-froala-wysiwyg-4.0.20-SNAPSHOT.tgz ../../my-project move the tarball inside your project
+* Update your package.json like the following "angular-froala-wysiwyg": "./angular-froala-wysiwyg-4.0.20-SNAPSHOT.tgz",
+* rm -rf node_modules package-lock.json && npm i clean
+* reinstall
+
+
+## Example:
+
+Build your custom Froala Module (froala.module.ts):
+```ts
+import { NgModule } from '@angular/core';
+
+import 'froala-editor/js/plugins/word_paste.min.js';
+import 'froala-editor/js/plugins/quick_insert.min.js';
+import 'froala-editor/js/plugins/paragraph_style.min.js';
+import 'froala-editor/js/plugins/paragraph_format.min.js';
+import 'froala-editor/js/plugins/line_breaker.min.js';
+import 'froala-editor/js/plugins/inline_class.min.js';
+import 'froala-editor/js/plugins/entities.min.js';
+import 'froala-editor/js/plugins/code_view.min.js';
+import 'froala-editor/js/plugins/char_counter.min.js';
+import 'froala-editor/js/plugins/align.min.js';
+import 'froala-editor/js/plugins/lists.min.js';
+import 'froala-editor/js/plugins/link.min.js';
+
+import 'froala-editor/js/languages/de.js';
+import { FroalaEditorDirective, FroalaViewDirective } from 'angular-froala-wysiwyg';
+
+@NgModule({
+  imports: [FroalaEditorDirective, FroalaViewDirective],
+  exports: [FroalaEditorDirective, FroalaViewDirective],
+})
+export class FroalaModule {}
+```
+
+and import it in your main.ts:
+```ts
+    ...
+    importProvidersFrom(
+        FroalaModule,
+        ...
+    ),
+```
+
+
+
+
+
+
+
+
+
 # Angular Froala WYSIWYG Editor - [Demo](https://www.froala.com/wysiwyg-editor)
 
 [![npm](https://img.shields.io/npm/v/angular-froala-wysiwyg.svg)](https://www.npmjs.com/package/angular-froala-wysiwyg)
@@ -172,24 +234,24 @@ import { FroalaEditorModule, FroalaViewModule } from 'angular-froala-wysiwyg';
 ...
 
 ```
-Replace  
+Replace
 ```
 imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule]
 ```
-with   
+with
 ```
 imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule,FroalaEditorModule.forRoot(), FroalaViewModule.forRoot()]
 ```
 
 - Inside `src/app/app-routing.module.ts` remove the line
 ```
-{ path: '', redirectTo: 'home', pathMatch: 'full' }  
+{ path: '', redirectTo: 'home', pathMatch: 'full' }
 ```
 
 - Inside `src/index.html`
 
 ```html
-<link rel="stylesheet" href="assets/css/font-awesome.min.css">  
+<link rel="stylesheet" href="assets/css/font-awesome.min.css">
 <link rel="stylesheet" href="assets/css/froala_editor.pkgd.min.css">
 <link rel="stylesheet" href="assets/css/froala_style.min.css">
 ```
@@ -198,7 +260,7 @@ imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule,FroalaEditorMod
 ```javascript
 "assets":[
  ...,
- 
+
   {
     "glob": "**/*",
     "input": "node_modules/froala-editor/css",
@@ -423,7 +485,7 @@ npm run start
 import 'froala-editor/js/third_party/font_awesome.min';
 ```
 
-- Go to `angular.json` and change `architect.build.options.outputPath` to `src/dist` and add following json to `architect.build.options.assets array` 
+- Go to `angular.json` and change `architect.build.options.outputPath` to `src/dist` and add following json to `architect.build.options.assets array`
 
 ```bash
 npm install angular-froala-wysiwyg --save
