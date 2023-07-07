@@ -9,7 +9,7 @@
 * cd dist move to the dist folder
 * npm pack create a tarball of the current folder
 * cp angular-froala-wysiwyg-4.0.20-SNAPSHOT.tgz ../../my-project move the tarball inside your project
-* Update your package.json like the following "angular-froala-wysiwyg": "./angular-froala-wysiwyg-4.0.20-SNAPSHOT.tgz",
+* Update your package.json like the following `"angular-froala-wysiwyg": "./angular-froala-wysiwyg-4.0.20-SNAPSHOT.tgz"`,
 * rm -rf node_modules package-lock.json && npm i clean
 * reinstall
 
